@@ -9,11 +9,19 @@ if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
     $host_type = "http://";
 }
 
-//check is it valet server or laravel inbuilt server
-if ($hostname == '127.0.0.1:8000' || str_contains($script_name, 'valet/')) {
+$base_path_uri = str_replace("index.php", "", $script_name);
+
+// Smart asset_url detection
+if (env('ASSET_URL')) {
+    $asset_url = env('ASSET_URL');
+} elseif ($hostname == '127.0.0.1:8000' || str_contains($script_name, 'valet/')) {
     $asset_url = null;
+} elseif ($base_path_uri === '/' || str_ends_with(rtrim($base_path_uri, '/'), 'public')) {
+    // Serving directly from the public directory as domain root (e.g. production subdomain or local vhost)
+    $asset_url = $base_path_uri;
 } else {
-    $asset_url = str_replace("index.php", "", $script_name) . 'public';
+    // Local development subdirectory (e.g. XAMPP http://localhost/schage/)
+    $asset_url = $base_path_uri . 'public';
 }
 
 $app_url = $host_type . $hostname;
