@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\schage\resources\views/external_plugin.blade.php ENDPATH**/ ?>
