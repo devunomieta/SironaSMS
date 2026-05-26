@@ -274,7 +274,7 @@
         <div class="mid-cta-inner">
             <span class="mid-cta-eyebrow"><i class="fa-solid fa-bolt me-2"></i>Trusted by Schools Worldwide</span>
             <h2>Ready to Transform the Way<br class="d-none d-md-block"> Your School Operates?</h2>
-            <p>Join hundreds of institutions already running smarter, faster, and paperless<br class="d-none d-lg-block"> with Ekattor School Management System.</p>
+            <p>Join hundreds of institutions already running smarter, faster, and paperless<br class="d-none d-lg-block"> with Sirona School Management System.</p>
             <div class="mid-cta-actions">
                 <a href="{{ route('login') }}" class="mid-cta-btn-primary">Get Started Free <i class="fa-solid fa-arrow-right ms-2"></i></a>
                 <a href="mailto:{{ get_settings('contact_email') }}" class="mid-cta-btn-secondary"><i class="fa-solid fa-envelope me-2"></i>Talk to Us</a>
@@ -291,7 +291,7 @@
         <div class="title-area">
             <h1>Why Us</h1>
             <h3>Built for Modern Schools</h3>
-            <p>Ekattor isn't just software — it's an operating system for your entire institution, engineered for reliability, speed, and simplicity.</p>
+            <p>Sirona isn't just software — it's an operating system for your entire institution, engineered for reliability, speed, and simplicity.</p>
         </div>
         <div class="row g-4 mt-4">
             <div class="col-lg-4 col-md-6">
@@ -305,7 +305,7 @@
                 <div class="why-us-card">
                     <div class="why-us-icon"><i class="fa-solid fa-cloud"></i></div>
                     <h4>Cloud-Ready & Scalable</h4>
-                    <p>Deploy on any server or cloud infrastructure. Ekattor scales effortlessly from a single campus to a multi-branch school network.</p>
+                    <p>Deploy on any server or cloud infrastructure. Sirona scales effortlessly from a single campus to a multi-branch school network.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -386,7 +386,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="testimonial-quote">"Ekattor completely transformed how we manage student records and fees. What used to take days now takes minutes. Absolutely essential for any modern school."</p>
+                    <p class="testimonial-quote">"Sirona completely transformed how we manage student records and fees. What used to take days now takes minutes. Absolutely essential for any modern school."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
                         <div>
@@ -456,18 +456,18 @@
                         @else
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="faqHeading1">
-                                    <button class="accordion-button round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">What is Ekattor School Management System?</button>
+                                    <button class="accordion-button round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">What is Sirona School Management System?</button>
                                 </h2>
                                 <div id="faqCollapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body"><p>Ekattor is a comprehensive, cloud-ready school management platform that centralizes student admissions, attendance, academics, fees, library, and staff management into one unified system.</p></div>
+                                    <div class="accordion-body"><p>Sirona is a comprehensive, cloud-ready school management platform that centralizes student admissions, attendance, academics, fees, library, and staff management into one unified system.</p></div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="faqHeading2">
-                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">Who can use Ekattor?</button>
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">Who can use Sirona?</button>
                                 </h2>
                                 <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body"><p>Ekattor supports nine distinct user roles: Superadmin, School Administrator, Teacher, Accountant, Librarian, Parent, Student, Driver, and Alumni — each with a fully tailored dashboard.</p></div>
+                                    <div class="accordion-body"><p>Sirona supports nine distinct user roles: Superadmin, School Administrator, Teacher, Accountant, Librarian, Parent, Student, Driver, and Alumni — each with a fully tailored dashboard.</p></div>
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -483,7 +483,7 @@
                                     <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">Is there an online payment integration?</button>
                                 </h2>
                                 <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body"><p>Yes. Ekattor supports secure online payment gateways so parents can pay school fees directly from the parent portal without any physical cash handling.</p></div>
+                                    <div class="accordion-body"><p>Yes. Sirona supports secure online payment gateways so parents can pay school fees directly from the parent portal without any physical cash handling.</p></div>
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -496,10 +496,10 @@
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="faqHeading6">
-                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">Is data secure on Ekattor?</button>
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">Is data secure on Sirona?</button>
                                 </h2>
                                 <div id="faqCollapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body"><p>Absolutely. Ekattor uses role-based access control (RBAC), encrypted credentials, and session-based authentication, ensuring that sensitive student and financial data is always protected.</p></div>
+                                    <div class="accordion-body"><p>Absolutely. Sirona uses role-based access control (RBAC), encrypted credentials, and session-based authentication, ensuring that sensitive student and financial data is always protected.</p></div>
                                 </div>
                             </div>
                         @endif
@@ -523,7 +523,7 @@
         <div class="final-cta-inner text-center">
             <span class="final-cta-eyebrow"><i class="fa-solid fa-graduation-cap me-2"></i>Start Your Journey Today</span>
             <h2>Your School Deserves Better Tools.</h2>
-            <p>Stop managing your school with outdated spreadsheets and disconnected apps. Ekattor brings every department under one intelligent roof — saving time, reducing errors, and empowering every stakeholder.</p>
+            <p>Stop managing your school with outdated spreadsheets and disconnected apps. Sirona brings every department under one intelligent roof — saving time, reducing errors, and empowering every stakeholder.</p>
             <div class="final-cta-actions">
                 <a href="{{ route('login') }}" class="final-cta-primary">Get Started Now <i class="fa-solid fa-arrow-right ms-2"></i></a>
                 <a href="mailto:{{ get_settings('contact_email') }}" class="final-cta-secondary"><i class="fa-solid fa-envelope me-2"></i>Email Us</a>

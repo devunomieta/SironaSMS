@@ -5,11 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Creativeitem Software Installation" />
-	<meta name="author" content="Creativeitem" />
+	<meta name="description" content="Sirona Software Installation" />
+	<meta name="author" content="CortDevs" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="shortcut icon" href="{{ asset('assets/uploads/logo/favicon.png') }}">
-	<title>{{ phrase('Installation').' | '.phrase('Ekattor') }}</title>
+	<title>{{ phrase('Installation').' | '.phrase('Sirona') }}</title>
 	
 	<!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-5.1.3/css/bootstrap.min.css') }}">
