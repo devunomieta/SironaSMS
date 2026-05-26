@@ -22,9 +22,9 @@
                 <nav class="header-menu">
                     <ul class="primary-menu d-flex justify-content-center">
                         <li class="nav-item"><a class="nav-link" href="#">{{ get_phrase('Home') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#feature">{{ get_phrase('Feature') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#price">{{ get_phrase('Price') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#faq">{{ get_phrase('Faq') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#feature">{{ get_phrase('Features') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#why-us">{{ get_phrase('Why Us') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#faq">{{ get_phrase('FAQ') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">{{ get_phrase('Contact') }}</a></li>
                     </ul>
                 </nav>
@@ -248,7 +248,7 @@
       
         <div class="row mt-5 pt-3">
             @foreach ($frontendFeatures as $frontendFeature)
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12  mb-60">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-60 fade-in-up">
                 <div class="service-items">
                     <div class="service-icon">
                         <i class="{{$frontendFeature->icon }}"></i>
@@ -260,416 +260,382 @@
                 </div>
             </div>
             @endforeach
-            
-            
         </div>
 
-        @if(count($frontendFeatures) > 7)
-        <div class="see-all-btn">
-            <a class="see-btn" id="see-btn">{{ get_phrase('See all') }} <i class="fa-solid fa-right-long"></i></a>
-        </div>
-        @else
-            
-        @endif
-        
     </div>
 </section>
 <!--  Feature Area End   -->
-<!--  Pricing Area Start   -->
-<section class="pricing-area section-padding" id="price">
-    <div class="container-xl">
-        <!-- Title  -->
-        <div class="title-area">
-            <h1>{{ get_phrase('Price') }}</h1>
-            <h3>{{ get_phrase('Price') }}</h3>
-            <p>{{ get_settings('price_subtitle') }}</p>
-        </div>
-        <div class="row">
-        	@foreach($packages as $package)
-	        	@if($package->interval == 'Monthly')
-	        		@php $interval = 'mon'; @endphp
-	        	@elseif($package->interval == 'Yearly')
-	        		@php $interval = 'year'; @endphp
-	        	@else
-	        		@php $interval = 'day'; @endphp
-	        	@endif
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
-                <div class="pricing-table">
-                    <span class="trail-price">{{ $package->name }}</span>
-                    <h4>{{ currency($package->price) }}<span class="small-text">/@if($package['interval'] == 'life_time')
-                        {{ get_phrase('life time') }}
-                        @else
-                          <?php if($package['interval'] == 'Days'): ?>
-                            {{ $package['days'].' '.$package['interval'] }}
-                        <?php else: ?>
-                            {{ $package['interval'] }}
-                        <?php endif; ?>
-                        @endif</span></h4>
-                        <p class="color-ff">Total Students: {{ $package->studentLimit }}</p>
-                        @php
-						$packages_features = json_decode($package->features);
-					 @endphp 
 
-                    <ul class="pricing-item" style="border-top:0px;">
-                        @foreach ($packages_features as $packages_feature)
-						<li class="color-ff">{{ $packages_feature }}</li>
-						@endforeach
-                        <li class="color-ff">Description: {{ $package->description }}</li>
-                    </ul>
-                    @if(Auth::check() && auth()->user()->role_id == 1)
-                        <a href="javascript:;" class="subscribe-btn" onclick="subscription_warning('{{ auth()->user()->role_id }}')">{{ get_phrase('Subscribe') }}</a>
-                    @elseif(Auth::check() && auth()->user()->role_id == 2)
-                        @php $status = subscription_check(auth()->user()->school_id) @endphp
-                        @if($status != 1)
-                            <a href="{{ route('admin.subscription.payment', ['package_id'=> $package->id]) }}" class="subscribe-btn">{{ get_phrase('Subscribe') }}</a>
-                        @else
-                            <a href="javascript:;" class="subscribe-btn" onclick="subscription_warning('{{ auth()->user()->role_id }}')">{{ get_phrase('Subscribe') }}</a>
-                        @endif
-                    @else
-                        <a href="javascript:;" class="subscribe-btn" onclick="subscription_warning()">{{ get_phrase('Subscribe') }}</a>
-                    @endif
-                </div>
+<!-- ===== MID CTA BANNER ===== -->
+<section class="mid-cta-banner">
+    <div class="mid-cta-dot mid-cta-dot-1"></div>
+    <div class="mid-cta-dot mid-cta-dot-2"></div>
+    <div class="container">
+        <div class="mid-cta-inner">
+            <span class="mid-cta-eyebrow"><i class="fa-solid fa-bolt me-2"></i>Trusted by Schools Worldwide</span>
+            <h2>Ready to Transform the Way<br class="d-none d-md-block"> Your School Operates?</h2>
+            <p>Join hundreds of institutions already running smarter, faster, and paperless<br class="d-none d-lg-block"> with Ekattor School Management System.</p>
+            <div class="mid-cta-actions">
+                <a href="{{ route('login') }}" class="mid-cta-btn-primary">Get Started Free <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                <a href="mailto:{{ get_settings('contact_email') }}" class="mid-cta-btn-secondary"><i class="fa-solid fa-envelope me-2"></i>Talk to Us</a>
             </div>
-            @endforeach
+            <p class="mid-cta-trust"><i class="fa-solid fa-circle-check me-1"></i>No credit card required &nbsp;&middot;&nbsp; <i class="fa-solid fa-circle-check me-1"></i>Quick setup &nbsp;&middot;&nbsp; <i class="fa-solid fa-circle-check me-1"></i>Dedicated support</p>
         </div>
     </div>
 </section>
-<!--  Pricing Area End   -->
-<!--  Faq  Area Start   -->
-<section class="faq-area" id="faq">
-    <div class="container-xl">
-         <!-- Title  -->
-         <div class="title-area">
-            <h1>{{ get_phrase('Have Any Question') }}</h1>
-            <h3>{{ get_phrase('Faq') }}</h3>
-            <p>{{ get_settings('faq_subtitle') }}</p>
+<!-- ===== MID CTA BANNER END ===== -->
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="why-us-area section-padding" id="why-us">
+    <div class="container">
+        <div class="title-area">
+            <h1>Why Us</h1>
+            <h3>Built for Modern Schools</h3>
+            <p>Ekattor isn't just software — it's an operating system for your entire institution, engineered for reliability, speed, and simplicity.</p>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row g-4 mt-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>Enterprise-Grade Security</h4>
+                    <p>Role-based access control ensures every user — from superadmin to student — only sees what they need. Your data is always protected.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <h4>Cloud-Ready & Scalable</h4>
+                    <p>Deploy on any server or cloud infrastructure. Ekattor scales effortlessly from a single campus to a multi-branch school network.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h4>Fully Responsive Dashboards</h4>
+                    <p>Administrators, teachers, parents, and students all get optimized, mobile-first dashboards that work beautifully on any screen size.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>Powerful Reporting Engine</h4>
+                    <p>Generate attendance reports, academic progress summaries, fee ledgers, and library records in seconds — not hours.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-users-gear"></i></div>
+                    <h4>Multi-Role Management</h4>
+                    <p>From superadmin to alumni — each stakeholder gets a dedicated, purpose-built portal tailored to their specific workflows.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-card">
+                    <div class="why-us-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h4>Dedicated Onboarding Support</h4>
+                    <p>Getting started is easy. Our setup process and documentation walks your team through configuration at every step of the way.</p>
+                </div>
+            </div>
+        </div>
+        <!-- CTA inside section -->
+        <div class="text-center mt-5 pt-3">
+            <p class="why-us-sub-cta-text">Still unsure? Let our system do the talking.</p>
+            <a href="{{ route('login') }}" class="hero-btn-primary">Experience It Now <i class="fa-solid fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+<!-- ===== WHY CHOOSE US END ===== -->
+
+<!-- ===== STATS COUNTER ===== -->
+<section class="stats-area">
+    <div class="container">
+        <div class="stats-inner">
+            <div class="stat-item fade-in-up">
+                <div class="stat-number" data-target="38">0</div>
+                <div class="stat-label">Schools Onboarded</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item fade-in-up" style="animation-delay:0.1s">
+                <div class="stat-number" data-target="12">0</div>
+                <div class="stat-label">Core Modules</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item fade-in-up" style="animation-delay:0.2s">
+                <div class="stat-number" data-target="9">0</div>
+                <div class="stat-label">User Role Types</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item fade-in-up" style="animation-delay:0.3s">
+                <div class="stat-number" data-target="99">0</div>
+                <div class="stat-label">% Uptime Reliability</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===== STATS COUNTER END ===== -->
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-area section-padding" id="testimonials">
+    <div class="container">
+        <div class="title-area">
+            <h1>Reviews</h1>
+            <h3>What Schools Say About Us</h3>
+            <p>Trusted by administrators, loved by teachers, and appreciated by parents across the globe.</p>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="testimonial-quote">"Ekattor completely transformed how we manage student records and fees. What used to take days now takes minutes. Absolutely essential for any modern school."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <strong>Mr. Emmanuel Adeyemi</strong>
+                            <span>Principal, Sunlight International School</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="testimonial-quote">"The parent portal is a game-changer. I can check my child's attendance, grades, and fee status all in one place. I wish every school used this!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <strong>Mrs. Fatima Hassan</strong>
+                            <span>Parent, Greenfield Academy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    <p class="testimonial-quote">"Our accounting team saved countless hours on fee invoicing and payment tracking. The reports are clean, accurate, and ready for auditors at any time."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <strong>Mr. Daniel Okonkwo</strong>
+                            <span>Finance Director, Apex College</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===== TESTIMONIALS END ===== -->
+
+<!-- ===== FAQ ===== -->
+<section class="faq-area section-padding" id="faq">
+    <div class="container">
+        <div class="title-area">
+            <h1>FAQ</h1>
+            <h3>Frequently Asked Questions</h3>
+            <p>Everything you need to know before getting started. Can't find your answer? <a href="mailto:{{ get_settings('contact_email') }}" style="color:var(--secondary-color);font-weight:600;">Contact us directly.</a></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
                 <div class="accordion-area">
-                    <div class="accordion" id="accordionExample">
-                        @foreach($faqs as $faq)
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="heading{{ $loop->index + 1 }}">
-                            <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index + 1 }}" aria-expanded="false" aria-controls="collapse{{ $loop->index + 1 }}">{{ $faq->title }}</button>
-                          </h2>
-                          <div id="collapse{{ $loop->index + 1 }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $loop->index + 1 }}" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <p>{{ $faq->description }}</p>
+                    <div class="accordion" id="faqAccordion">
+
+                        @if($faqs->count() > 0)
+                            @foreach($faqs as $faq)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading{{ $loop->index + 1 }}">
+                                    <button class="accordion-button {{ $loop->index > 0 ? 'collapsed' : '' }} round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $loop->index + 1 }}" aria-expanded="{{ $loop->index == 0 ? 'true' : 'false' }}">
+                                        {{ $faq->title }}
+                                    </button>
+                                </h2>
+                                <div id="faqCollapse{{ $loop->index + 1 }}" class="accordion-collapse collapse {{ $loop->index == 0 ? 'show' : '' }}" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>{{ $faq->description }}</p></div>
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                        @endforeach
-                     </div>
-                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--  faq Area End   -->
-<!--  Cntact  Area Start  -->
-<section class="contact-us-area" id="contact">
-    <div class="container-xl">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="lan-contact">
-                    <div class="contact-left text-center">
-                        <h3>{{ get_phrase('Contact us with any questions') }}</h3>
-                        <a class="contact-us-btn" href="mailto:{{ get_settings('contact_email') }}"><i class="fa-solid fa-envelope"></i> {{ get_phrase('Contact Us') }}</a>
+                            @endforeach
+                        @else
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading1">
+                                    <button class="accordion-button round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">What is Ekattor School Management System?</button>
+                                </h2>
+                                <div id="faqCollapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Ekattor is a comprehensive, cloud-ready school management platform that centralizes student admissions, attendance, academics, fees, library, and staff management into one unified system.</p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading2">
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">Who can use Ekattor?</button>
+                                </h2>
+                                <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Ekattor supports nine distinct user roles: Superadmin, School Administrator, Teacher, Accountant, Librarian, Parent, Student, Driver, and Alumni — each with a fully tailored dashboard.</p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading3">
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">Can multiple schools use the system simultaneously?</button>
+                                </h2>
+                                <div id="faqCollapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Yes. The Superadmin panel allows managing multiple independent school instances from a single installation, making it ideal for school chains, networks, and educational group operators.</p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading4">
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">Is there an online payment integration?</button>
+                                </h2>
+                                <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Yes. Ekattor supports secure online payment gateways so parents can pay school fees directly from the parent portal without any physical cash handling.</p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading5">
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5">How do I get started?</button>
+                                </h2>
+                                <div id="faqCollapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Simply click the <strong>"Get Started"</strong> button, register your school, and our team will verify and activate your account. The process takes minutes, not days.</p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqHeading6">
+                                    <button class="accordion-button collapsed round-bg" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">Is data secure on Ekattor?</button>
+                                </h2>
+                                <div id="faqCollapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body"><p>Absolutely. Ekattor uses role-based access control (RBAC), encrypted credentials, and session-based authentication, ensuring that sensitive student and financial data is always protected.</p></div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-                    <div class="contact-right">
-                        <div class="envolepe-messeage">
-                            <img src="{{ asset('frontend/assets/image/envelope.png') }}" alt="image">
-                        </div>
-                    </div>
+                </div>
+                <!-- FAQ bottom CTA -->
+                <div class="faq-bottom-cta">
+                    <p>Still have questions?</p>
+                    <a href="mailto:{{ get_settings('contact_email') }}" class="hero-btn-primary"><i class="fa-solid fa-envelope me-2"></i>Email Our Team</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--  Contact Area End   -->
+<!-- ===== FAQ END ===== -->
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta-area" id="contact">
+    <div class="final-cta-glow"></div>
+    <div class="container">
+        <div class="final-cta-inner text-center">
+            <span class="final-cta-eyebrow"><i class="fa-solid fa-graduation-cap me-2"></i>Start Your Journey Today</span>
+            <h2>Your School Deserves Better Tools.</h2>
+            <p>Stop managing your school with outdated spreadsheets and disconnected apps. Ekattor brings every department under one intelligent roof — saving time, reducing errors, and empowering every stakeholder.</p>
+            <div class="final-cta-actions">
+                <a href="{{ route('login') }}" class="final-cta-primary">Get Started Now <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                <a href="mailto:{{ get_settings('contact_email') }}" class="final-cta-secondary"><i class="fa-solid fa-envelope me-2"></i>Email Us</a>
+            </div>
+            <p class="final-cta-note"><i class="fa-solid fa-lock me-1"></i> Secure setup &nbsp;&middot;&nbsp; <i class="fa-solid fa-clock me-1"></i> Quick onboarding &nbsp;&middot;&nbsp; <i class="fa-solid fa-headset me-1"></i> Dedicated support</p>
+        </div>
+    </div>
+</section>
+<!-- ===== FINAL CTA END ===== -->
 <!-- Footer Area Start -->
 <footer class="footer-area">
-   <!-- footer Top Area -->
     <div class="footer-top">
-         <div class="container-xl">
-             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-                    <div class="footer-items">
-                        <div class="footer-logo">
-                            <a href="#"><img src="{{ asset('assets/uploads/logo/'.get_settings('light_logo')) }}" alt="image"></a>
-                        </div>
-                        <p>{{ get_settings('frontend_footer_text') }}</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-                    <div class="contacts footer-items">
-                        <h4>Contact</h4>
-                        <ul class="ad-contacts">
-                            <li><a href="tel:{{ get_settings('phone') }}"><i class="fa-solid fa-phone"></i>{{ get_settings('phone') }}</a></li>
-                            <li><a href="mailto:{{ get_settings('contact_email') }}"><i class="fa-solid fa-envelope"></i>{{ get_settings('contact_email') }}</a></li>
-                            <li><span><i class="fa-solid fa-location-dot"></i></span><p>{{ get_settings('address') }}</p></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-                    <div class="addons footer-items">
-                        <h4>{{ get_phrase('Social Link') }}</h4>
+        <div class="container">
+            <div class="row g-5">
+                <!-- Brand column -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-brand">
+                        <a href="#" class="footer-logo-link">
+                            <img src="{{ asset('assets/uploads/logo/'.get_settings('light_logo')) }}" alt="{{ get_settings('system_title') }}" class="footer-logo-img">
+                        </a>
+                        <p class="footer-brand-desc">{{ get_settings('frontend_footer_text') ?: 'A comprehensive school management system built for modern institutions.' }}</p>
                         <ul class="footer-social">
                             <li><a href="{{ get_settings('facebook_link') }}" title="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
                             <li><a href="{{ get_settings('twitter_link') }}" title="Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
-                            <li><a href="{{ get_settings('linkedin_link') }}" title="Linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                            <li><a href="{{ get_settings('linkedin_link') }}" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                             <li><a href="{{ get_settings('instagram_link') }}" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
-              @php
-                $all_languages = get_all_language();
-
-                
-                
-              @endphp
-              @if(Auth::check() && auth()->user()->role_id == 1)
-              @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-              @endphp
-              <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                <button
-                  type="button"
-                  class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style="width: 91px; height: 29px; padding: 0;"
-                >
-                   <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                   
-                    @if(!empty($userlanguage))
-                   <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                   @else
-                   <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                   @endif
-                </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('superadmin.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 2)
-                  @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-                  @endphp
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('admin.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 3)
-                  @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-                  @endphp
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('teacher.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 4)
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('accountant.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 5)
-                  @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-                  @endphp
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('librarian.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 6)
-                  @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-                 @endphp
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('parent.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @elseif(Auth::check() && auth()->user()->role_id == 7)
-                  @php
-                  $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
-
-                  $userlanguage = $usersinfo->language;
-                    @endphp
-                  <div class="adminTable-action" style="margin-right: 20px; margin-top: 14px;">
-                    <button
-                      type="button"
-                      class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="width: 91px; height: 29px; padding: 0; border: none; border-radius: 8px;"
-                    >
-                       <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                       @if(!empty($userlanguage))
-                       <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
-                       @else
-                       <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
-                       @endif
-                    </button>
-                    
-                    <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
-                      <form method="post" id="languageForm" action="{{ route('student.language') }}">
-                        @csrf
-                        @foreach ($all_languages as $all_language)
-                            <li>
-                                <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
-                            </li>
-                        @endforeach
-                        <input type="hidden" name="language" id="selectedLanguageName">
-                    </form>
-                    </ul>
-                  </div>
-                  @else
-                  @endif
                 </div>
-          </div>
-     </div>
+                <!-- Quick links -->
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="footer-col">
+                        <h5 class="footer-col-title">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#feature">Features</a></li>
+                            <li><a href="#why-us">Why Us</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Contact -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="footer-col">
+                        <h5 class="footer-col-title">Contact</h5>
+                        <ul class="footer-contact-list">
+                            @if(get_settings('phone'))
+                            <li>
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:{{ get_settings('phone') }}">{{ get_settings('phone') }}</a>
+                            </li>
+                            @endif
+                            @if(get_settings('contact_email'))
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:{{ get_settings('contact_email') }}">{{ get_settings('contact_email') }}</a>
+                            </li>
+                            @endif
+                            @if(get_settings('address'))
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>{{ get_settings('address') }}</span>
+                            </li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+                <!-- CTA column -->
+                <div class="col-lg-3 col-md-4">
+                    <div class="footer-col">
+                        <h5 class="footer-col-title">Get Started</h5>
+                        <p style="color:rgba(255,255,255,0.5);font-size:14px;line-height:1.6;margin-bottom:20px;">Ready to modernize your school? Register or sign in to your dashboard.</p>
+                        <a href="{{ route('login') }}" class="footer-cta-btn">Login to Dashboard <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                        @php $all_languages = get_all_language(); @endphp
+                        @auth
+                        @php
+                            $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
+                            $userlanguage = $usersinfo->language ?? '';
+                            $langRoutes = [1=>'superadmin.language',2=>'admin.language',3=>'teacher.language',4=>'accountant.language',5=>'librarian.language',6=>'parent.language',7=>'student.language'];
+                            $roleId = auth()->user()->role_id;
+                            $langRoute = $langRoutes[$roleId] ?? null;
+                        @endphp
+                        @if($langRoute)
+                        <div class="footer-lang-wrap">
+                            <button type="button" class="footer-lang-btn dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-language"></i>
+                                <span>{{ ucwords($userlanguage ?: get_settings('language')) }}</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <form method="post" id="languageForm" action="{{ route($langRoute) }}">
+                                    @csrf
+                                    @foreach($all_languages as $al)
+                                        <li><a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $al->name }}">{{ ucwords($al->name) }}</a></li>
+                                    @endforeach
+                                    <input type="hidden" name="language" id="selectedLanguageName">
+                                </form>
+                            </ul>
+                        </div>
+                        @endif
+                        @endauth
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="footer-bottom">
-         <div class="copyright-text">
-           <p>© {{ get_settings('copyright_text') }}</p>
+        <div class="container">
+            <div class="footer-bottom-inner">
+                <p>© {{ get_settings('copyright_text') ?: date('Y').' '.get_settings('system_title') }}</p>
+                <p class="footer-bottom-right">Built with <i class="fa-solid fa-heart" style="color:#f43f5e;"></i> for modern education</p>
+            </div>
         </div>
     </div>
 </footer>
@@ -708,21 +674,46 @@
         }
     }
 
-        document.getElementById('see-btn').addEventListener('click', function() {
-        var currentUrl = new URL(window.location.href);
-        var seeAll = currentUrl.searchParams.get('see_all');
-
-        if (seeAll) {
-            // If 'see_all' is present, remove it from the URL
-            currentUrl.searchParams.delete('see_all');
-        } else {
-            // If 'see_all' is not present, add it to the URL
-            currentUrl.searchParams.set('see_all', true);
+    // Animated stats counter
+    (function () {
+        function animateCount(el, target, duration) {
+            var start = 0, step = target / (duration / 16);
+            var timer = setInterval(function () {
+                start += step;
+                if (start >= target) { start = target; clearInterval(timer); }
+                el.textContent = Math.floor(start).toLocaleString();
+            }, 16);
         }
+        var observed = false;
+        var statEls = document.querySelectorAll('.stat-number');
+        if (statEls.length && 'IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !observed) {
+                    observed = true;
+                    statEls.forEach(function(el) {
+                        animateCount(el, parseInt(el.getAttribute('data-target'), 10), 1800);
+                    });
+                }
+            }, { threshold: 0.3 });
+            observer.observe(document.querySelector('.stats-area'));
+        }
+    })();
 
-        // Redirect to the modified URL
-        window.location.href = currentUrl.toString();
-    });
+    // Scroll reveal animations
+    (function () {
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-in-up, .why-us-card, .testimonial-card, .stat-item, .accordion-item').forEach(function (el) {
+            io.observe(el);
+        });
+    })();
 
     function onSubmit(token) {
       document.getElementById("schoolReg").submit();

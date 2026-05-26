@@ -27,9 +27,7 @@ class HomeController extends Controller
             $faqs = Faq::all();
             $users = User::all();
             $schools = School::all();
-            $frontendFeatures = ($request->has('see_all')) 
-            ? FrontendFeature::all() 
-            : FrontendFeature::limit(8)->get();
+            $frontendFeatures = FrontendFeature::all();
             return view('frontend.landing_page', ['packages' => $packages, 'faqs' => $faqs, 'users' => $users,'schools' => $schools, 'frontendFeatures' => $frontendFeatures]);
         } else {
             return redirect(route('login'));

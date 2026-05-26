@@ -694,15 +694,11 @@ img {
     margin: 0;
 }
 
-.hide-service {
+.feature-hidden {
     display: none;
-}
-
-.hide-service.active {
-    display: block;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .see-all-btn {
@@ -1196,3 +1192,509 @@ img {
 
 /******** Footer Area End 
 ***************************************************************/
+
+/******** Mid CTA Banner
+***************************************************************/
+.mid-cta-banner {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #1d4ed8 100%);
+    padding: 90px 0;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+/* Decorative background dots */
+.mid-cta-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    pointer-events: none;
+}
+.mid-cta-dot-1 { width: 400px; height: 400px; top: -150px; right: -100px; }
+.mid-cta-dot-2 { width: 280px; height: 280px; bottom: -120px; left: -80px; }
+
+.mid-cta-inner {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+.mid-cta-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+}
+.mid-cta-inner h2 {
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+}
+.mid-cta-inner > p {
+    color: rgba(255,255,255,0.78);
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+}
+.mid-cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.mid-cta-btn-primary {
+    background: #fff;
+    color: #1d4ed8;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.mid-cta-btn-primary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+    color: #1d4ed8;
+}
+.mid-cta-btn-secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.mid-cta-btn-secondary:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.mid-cta-trust {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+}
+.mid-cta-trust i { color: rgba(255,255,255,0.7); }
+
+/******** Why Choose Us
+***************************************************************/
+.why-us-card {
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 32px 28px;
+    height: 100%;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+.why-us-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color), #60a5fa);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+.why-us-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(15,23,42,0.08); }
+.why-us-card:hover::before { transform: scaleX(1); }
+.why-us-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(37,99,235,0.15));
+    color: var(--secondary-color);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    transition: all 0.35s ease;
+}
+.why-us-card:hover .why-us-icon { background: var(--secondary-color); color: #fff; transform: scale(1.1) rotate(5deg); }
+.why-us-card h4 { font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 10px; letter-spacing: -0.3px; }
+.why-us-card p { font-size: 14px; line-height: 1.65; color: #64748b; margin: 0; }
+.why-us-sub-cta-text { font-size: 16px; color: #64748b; margin-bottom: 18px; }
+
+/******** Stats Counter
+***************************************************************/
+.stats-area { background: var(--primary-color); padding: 70px 0; }
+.stats-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 160px; text-align: center; padding: 20px 30px; }
+.stat-number { font-size: 52px; font-weight: 800; color: #fff; letter-spacing: -2px; line-height: 1; margin-bottom: 10px; font-family: var(--font-primary); }
+.stat-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; text-transform: uppercase; }
+.stat-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+
+/******** Testimonials
+***************************************************************/
+.testimonial-card {
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 32px 28px;
+    height: 100%;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+.testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,23,42,0.08); border-color: rgba(37,99,235,0.12); }
+.testimonial-stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+.testimonial-quote { font-size: 15px; line-height: 1.7; color: #475569; font-style: italic; flex: 1; margin-bottom: 24px; }
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.2));
+    color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.testimonial-author strong { display: block; font-size: 14px; font-weight: 700; color: var(--primary-color); }
+.testimonial-author span { font-size: 12px; color: #94a3b8; }
+
+/******** FAQ upgrades
+***************************************************************/
+.faq-area .accordion-item {
+    border: 1px solid #f1f5f9 !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.03);
+}
+.faq-area .accordion-button {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: #fff;
+    padding: 20px 24px;
+}
+.faq-area .accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(37,99,235,0.02));
+    color: var(--secondary-color);
+    box-shadow: none;
+}
+.faq-area .accordion-body { padding: 4px 24px 22px; font-size: 15px; line-height: 1.7; color: #64748b; }
+.faq-bottom-cta { text-align: center; margin-top: 48px; padding-top: 32px; border-top: 1px solid #f1f5f9; }
+.faq-bottom-cta p { font-size: 17px; color: #64748b; margin-bottom: 16px; font-weight: 500; }
+
+/******** Final CTA Section (Light Themed to decouple from dark footer)
+***************************************************************/
+.final-cta-area {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #f1f5f9;
+}
+.final-cta-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+.final-cta-inner h2 { 
+    font-size: 42px; 
+    font-weight: 800; 
+    color: #0f172a; 
+    letter-spacing: -1.2px; 
+    line-height: 1.2; 
+    margin-bottom: 18px; 
+}
+.final-cta-inner p { 
+    font-size: 17px; 
+    color: #475569; 
+    max-width: 620px; 
+    margin: 0 auto 40px; 
+    line-height: 1.7; 
+}
+.final-cta-eyebrow {
+    display: inline-block;
+    background: rgba(37,99,235,0.08);
+    border: 1px solid rgba(37,99,235,0.15);
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+}
+.final-cta-actions { 
+    display: flex; 
+    gap: 16px; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    margin-bottom: 32px; 
+}
+.final-cta-primary {
+    background: var(--secondary-color);
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+}
+.final-cta-primary:hover { 
+    background: #1d4ed8; 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 30px rgba(37,99,235,0.4); 
+    color: #fff !important; 
+}
+.final-cta-secondary {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #334155 !important;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 15px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.final-cta-secondary:hover { 
+    background: #f8fafc; 
+    color: #1e293b !important; 
+    border-color: #94a3b8; 
+}
+.final-cta-note { 
+    font-size: 14px; 
+    color: #64748b; 
+    margin: 0; 
+}
+
+/******** Section Spacing & Padding Upgrades (Fixes Why Us & FAQ Button Clipping)
+***************************************************************/
+.why-us-area {
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+}
+.faq-area {
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 2;
+}
+
+/******** Modern Footer Layout Styles
+***************************************************************/
+.footer-area {
+    background-color: #0A1C3A;
+    color: #fff;
+    font-family: var(--font-secondary);
+}
+.footer-top {
+    padding: 90px 0 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.footer-logo-img {
+    height: 48px;
+    width: auto;
+    margin-bottom: 24px;
+    display: block;
+}
+.footer-brand-desc {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 320px;
+}
+.footer-social {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.footer-social a:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+.footer-col-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    position: relative;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links a {
+    color: #94a3b8;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 4px;
+}
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-contact-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+.footer-contact-list li i {
+    color: var(--secondary-color);
+    font-size: 16px;
+    margin-top: 3px;
+}
+.footer-contact-list a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.footer-contact-list a:hover {
+    color: #fff;
+}
+.footer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--secondary-color);
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+}
+.footer-cta-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+.footer-lang-wrap {
+    margin-top: 24px;
+    position: relative;
+    display: inline-block;
+}
+.footer-lang-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.footer-lang-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.footer-bottom {
+    padding: 24px 0;
+    background: #07142b;
+    border-top: none;
+}
+.footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.footer-bottom p {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+}
+.footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/******** Scroll Reveal Animation Styles
+***************************************************************/
+.fade-in-up, .why-us-card, .testimonial-card, .stat-item, .accordion-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+.fade-in-up.visible, .why-us-card.visible, .testimonial-card.visible, .stat-item.visible, .accordion-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.row > div:nth-child(2) .fade-in-up, 
+.row > div:nth-child(2) .why-us-card, 
+.row > div:nth-child(2) .testimonial-card {
+    transition-delay: 0.1s;
+}
+.row > div:nth-child(3) .fade-in-up, 
+.row > div:nth-child(3) .why-us-card, 
+.row > div:nth-child(3) .testimonial-card {
+    transition-delay: 0.2s;
+}
+.row > div:nth-child(4) .fade-in-up, 
+.row > div:nth-child(4) .why-us-card, 
+.row > div:nth-child(4) .testimonial-card {
+    transition-delay: 0.3s;
+}
+
