@@ -16,7 +16,14 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+// Dynamic check for custom deployment folder or local layout
+if (file_exists(__DIR__.'/../sirona-core/storage/framework/maintenance.php')) {
+    $maintenance = __DIR__.'/../sirona-core/storage/framework/maintenance.php';
+} else {
+    $maintenance = __DIR__.'/../storage/framework/maintenance.php';
+}
+
+if (file_exists($maintenance)) {
     require $maintenance;
 }
 
@@ -31,7 +38,11 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+if (file_exists(__DIR__.'/../sirona-core/vendor/autoload.php')) {
+    require __DIR__.'/../sirona-core/vendor/autoload.php';
+} else {
+    require __DIR__.'/../vendor/autoload.php';
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +55,11 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+if (file_exists(__DIR__.'/../sirona-core/bootstrap/app.php')) {
+    $app = require_once __DIR__.'/../sirona-core/bootstrap/app.php';
+} else {
+    $app = require_once __DIR__.'/../bootstrap/app.php';
+}
 
 $kernel = $app->make(Kernel::class);
 
@@ -53,3 +68,4 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);
+
