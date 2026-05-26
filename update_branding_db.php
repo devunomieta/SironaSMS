@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 try {
     $updatedSettings = 0;
-    $settings = DB::table('settings')->where('description', 'like', '%Ekattor%')->get();
+    $settings = DB::table('global_settings')->where('value', 'like', '%Ekattor%')->get();
     foreach ($settings as $setting) {
-        $newDesc = str_replace(['Ekattor8', 'Ekattor 8', 'Ekattor'], 'Sirona', $setting->description);
-        DB::table('settings')->where('id', $setting->id)->update(['description' => $newDesc]);
+        $newValue = str_replace(['Ekattor8', 'Ekattor 8', 'Ekattor'], 'Sirona', $setting->value);
+        DB::table('global_settings')->where('id', $setting->id)->update(['value' => $newValue]);
         $updatedSettings++;
     }
 
