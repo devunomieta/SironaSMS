@@ -17,8 +17,15 @@ if (! function_exists('get_user_image')) {
             $user_id = $file_name_or_user_id;
             $user_information = DB::table('users')->where('id', $user_id)->value('user_information');
 
-            $file_name = json_decode($user_information)->photo;
+            $file_name = json_decode($user_information)->photo ?? '';
+        }
 
+        // Return URL directly if hosted on Cloudinary or external CDN
+        if (str_starts_with($file_name, 'http://') || str_starts_with($file_name, 'https://')) {
+            return $file_name;
+        }
+
+        if($user_id > 0){
             if(file_exists( public_path().'/assets/uploads/user-images/'.$file_name ) && is_file(public_path().'/assets/uploads/user-images/'.$file_name)){
                 return asset('assets/uploads/user-images/'.$file_name);
             }else{
@@ -29,6 +36,63 @@ if (! function_exists('get_user_image')) {
         }else{
             return asset('assets/uploads/user-images/thumbnail.png');
         }
+    }
+}
+
+if (! function_exists('upload_image')) {
+    /**
+     * Upload a file to Cloudinary (if configured) or locally.
+     *
+     * @param \Illuminate\Http\UploadedFile $file
+     * @param string $localPath
+     * @return string
+     */
+    function upload_image($file, $localPath = 'assets/uploads/user-images/') {
+        $cloud_name = env('CLOUDINARY_CLOUD_NAME');
+        $api_key = env('CLOUDINARY_API_KEY');
+        $api_secret = env('CLOUDINARY_API_SECRET');
+
+        if (!empty($cloud_name) && !empty($api_key) && !empty($api_secret)) {
+            $timestamp = time();
+            $signature = sha1("timestamp=" . $timestamp . $api_secret);
+
+            $client = new \GuzzleHttp\Client();
+            try {
+                $response = $client->post("https://api.cloudinary.com/v1_1/{$cloud_name}/auto/upload", [
+                    'multipart' => [
+                        [
+                            'name'     => 'file',
+                            'contents' => fopen($file->getRealPath(), 'r'),
+                            'filename' => $file->getClientOriginalName()
+                        ],
+                        [
+                            'name'     => 'api_key',
+                            'contents' => $api_key
+                        ],
+                        [
+                            'name'     => 'timestamp',
+                            'contents' => $timestamp
+                        ],
+                        [
+                            'name'     => 'signature',
+                            'contents' => $signature
+                        ]
+                    ]
+                ]);
+
+                $result = json_decode($response->getBody()->getContents(), true);
+                if (isset($result['secure_url'])) {
+                    return $result['secure_url'];
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Cloudinary upload failed: " . $e->getMessage() . ". Falling back to local upload.");
+            }
+        }
+
+        // Local fallback
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path($localPath), $fileName);
+        return $fileName;
     }
 }
 

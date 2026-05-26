@@ -93,12 +93,7 @@ class HomeController extends Controller
                     ]);
                     
                     if (!empty($data['photo'])) {
-    
-                        $imageName = time() . '.' . $data['photo']->extension();
-    
-                        $data['photo']->move(public_path('assets/uploads/user-images/'), $imageName);
-    
-                        $photo  = $imageName;
+                        $photo = upload_image($data['photo'], 'assets/uploads/user-images/');
                     } else {
                         $photo = '';
                     }
@@ -156,12 +151,7 @@ class HomeController extends Controller
                     ]);
                     
                     if (!empty($data['photo'])) {
-    
-                        $imageName = time() . '.' . $data['photo']->extension();
-    
-                        $data['photo']->move(public_path('assets/uploads/user-images/'), $imageName);
-    
-                        $photo  = $imageName;
+                        $photo = upload_image($data['photo'], 'assets/uploads/user-images/');
                     } else {
                         $photo = '';
                     }
