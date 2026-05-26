@@ -16,12 +16,15 @@ if (env('ASSET_URL')) {
     $asset_url = env('ASSET_URL');
 } elseif ($hostname == '127.0.0.1:8000' || str_contains($script_name, 'valet/')) {
     $asset_url = null;
-} elseif ($base_path_uri === '/' || str_ends_with(rtrim($base_path_uri, '/'), 'public')) {
-    // Serving directly from the public directory as domain root (e.g. production subdomain or local vhost)
-    $asset_url = $base_path_uri;
+} elseif ($base_path_uri === '/' || empty($base_path_uri)) {
+    // Serving directly from the domain root (e.g. production subdomain or local vhost)
+    $asset_url = null;
+} elseif (str_ends_with(rtrim($base_path_uri, '/'), 'public')) {
+    // Path already has public in it, use it but trim trailing slash to prevent '//'
+    $asset_url = rtrim($base_path_uri, '/');
 } else {
     // Local development subdirectory (e.g. XAMPP http://localhost/schage/)
-    $asset_url = $base_path_uri . 'public';
+    $asset_url = rtrim($base_path_uri, '/') . '/public';
 }
 
 $app_url = $host_type . $hostname;
