@@ -50,9 +50,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/landing', function () {
+    return redirect()->route('login');
+})->name('landingPage');
+
 Route::controller(HomeController::class)->group(function () {
 
-    Route::get('/landing', 'home')->name('landingPage');
+    Route::get('/register', 'registerPage')->name('register.page')->middleware('guest');
     Route::post('school/create', 'schoolCreate')->name('school.create');
     Route::get('web_redirect_to_pay_fee', 'webRedirectToPayFee')->name('webRedirectToPayFee');  
 

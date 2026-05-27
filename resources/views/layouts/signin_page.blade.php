@@ -206,7 +206,7 @@
     /* Buttons */
     .auth-btn-primary {
       background-color: var(--primary-color);
-      color: #ffffff;
+      color: #ffffff !important;
       font-weight: 600;
       font-size: 15px;
       padding: 12px 24px;
@@ -215,12 +215,15 @@
       width: 100%;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+      text-decoration: none !important;
     }
 
     .auth-btn-primary:hover {
       background-color: var(--primary-hover);
+      color: #ffffff !important;
       transform: translateY(-1px);
       box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+      text-decoration: none !important;
     }
 
     .auth-btn-primary:active {

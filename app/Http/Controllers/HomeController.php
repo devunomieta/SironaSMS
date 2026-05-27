@@ -34,6 +34,11 @@ class HomeController extends Controller
         }
     }
 
+    public function registerPage()
+    {
+        return view('frontend.register_page');
+    }
+
     /**
      * Show the application dashboard.
      *

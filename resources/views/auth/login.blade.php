@@ -102,11 +102,11 @@
             <div class="text-center pt-3 border-top" style="border-color: #f1f5f9 !important;">
                 <p class="text-muted small mb-3">{{ get_phrase('Interested in registering your school?') }}</p>
                 <div class="d-flex flex-wrap justify-content-center gap-2">
-                    <a href="mailto:{{ get_settings('system_email') }}" class="auth-btn-secondary py-2 px-3 rounded-pill" style="font-size: 13px;">
-                        <i class="bi bi-envelope-fill text-primary"></i> {{ get_phrase('Contact Admin') }}
+                    <a href="{{ route('register.page') }}" class="auth-btn-primary py-2 px-4 rounded-pill" style="font-size: 13px; width: auto; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="bi bi-bank"></i> {{ get_phrase('Register School') }}
                     </a>
-                    <a href="{{ route('landingPage') }}" class="auth-btn-secondary py-2 px-3 rounded-pill" style="font-size: 13px;">
-                        <i class="bi bi-compass-fill"></i> {{ get_phrase('Explore Features') }}
+                    <a href="mailto:{{ get_settings('system_email') }}" class="auth-btn-secondary py-2 px-3 rounded-pill" style="font-size: 13px; width: auto;">
+                        <i class="bi bi-envelope-fill text-primary"></i> {{ get_phrase('Contact Admin') }}
                     </a>
                 </div>
             </div>
